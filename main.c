@@ -23,8 +23,13 @@
 #include "includes.h"
 #include "init.h"
 
-// Variable Global
-bool CanWeMove = true;
+// Global Variables
+volatile char Cmd;
+volatile char CanWeMove = 'y';
+float vB=0, vQR1=0, vQR2=0, valor1 = 0, valor2 = 0, valor3 = 0, vQR3=0, VTD1 = 0;
+float sensor1=0,sensor2=0,sensor3=0,bateria=0;
+int flag=0, bandera = 0;
+char s1, s2, s3;
 
  //  Declare functions and global variables here
 
@@ -33,23 +38,21 @@ ISR(USART_RXC_vect)
 	//  UART Receiver Interrupt
 
 	char Cmd;
-	Cmd = UARTReadChar(void);
-
+	Cmd = UDR;
 	if (Cmd == 's') {
 
 		// Uno de los carros llega a la estacion, el otro se detiene igual...
 		OCR0 = 0;
 	    OCR2 = 0;
-		CanWeMove = false;
-	// _delay_ms(10000); // Este delay se puede borrar... y que el carro espere 
-	// OCR0 = 150;
-	// OCR2 = 150;
-
+		CanWeMove = 'N';
+	    // _delay_ms(10000); // Este delay se puede borrar... y que el carro espere 
+	    // OCR0 = 150;
+	    // OCR2 = 150;
 	}
 	else if (Cmd=='d') { // El otro carro me dice que le siga...
 		OCR0 = 150;
 		OCR2 = 150;
-		CanWeMove = true;
+		CanWeMove = 'Y';
 	}
 	else if (Cmd == 'r') {
 
@@ -64,12 +67,7 @@ ISR(USART_TXC_vect)
 }
 
 
-float vB=0, vQR1=0, vQR2=0, valor1 = 0, valor2 = 0, valor3 = 0, vQR3=0, VTD1 = 0;
-float sensor1=0,sensor2=0,sensor3=0,bateria=0;
-int flag=0, bandera = 0;
-char s1, s2, s3;
-
-//Interrupción
+//Interrupcion
 
 ISR(ADC_vect){
 	if (flag==0)
@@ -241,7 +239,7 @@ void Prueba(){
 	vQR3=(sensor3*0.00488);
 
 	if (vQR1 >= BLANCO_LI && vQR1 <= BLANCO_LS && vQR2 >= NEGRO_LI && vQR2 <= NEGRO_LS && vQR3 >= BLANCO_LI && vQR3 <= BLANCO_LS){
-		//LÍNEA RECTA
+		//Lï¿½NEA RECTA
 		//BNB
 		OCR0 = 150;
 		OCR2 = 150;
@@ -254,7 +252,7 @@ void Prueba(){
 	}	
 	else if (vQR1 >= 3.5 && vQR1 <= 5 && vQR2 >= 3.5 && vQR2 <= 5 && vQR3 >= 3.5 && vQR3 <= 5) { //MEJORAR PRRO
      // Cambia los valores de voltaje, por ejemplo 3.5 por los macros BLANCO, ROJO o NEGRO 
-	 //ESTACIÓN
+	 //ESTACIï¿½N
 	 //RNR
 	 UARTWriteChar('s'); // Dile al otro carro que aguante 10 segundos
 	 OCR0 = 0;
@@ -283,7 +281,7 @@ void Prueba(){
 	
 	else if (vQR1 >= 2 && vQR1 <= 3.25 && vQR2 >= 2 && vQR2 <= 3.25  && vQR3 >= 2 && vQR3 <= 3.25){
 		
-		//INTERSECCIÓN
+		//INTERSECCIï¿½N
 		//NNN
 		OCR0 = 100;
 		OCR2 = 150;
@@ -295,7 +293,7 @@ int main(void)
 	// ADC
 	ADMUX = 0b00000000;
 	ADCSRA |= (1 << ADIE) | (1 << ADEN) | (1 << ADPS0) | (1 << ADPS1) | (1 << ADPS2); //Habilitando ADC y su interpretacion
-	ADCSRA |= (1 << ADSC); //Iniciando Primera Conversión
+	ADCSRA |= (1 << ADSC); //Iniciando Primera Conversiï¿½n
 	//10 bits phase correct, sin preescalador,  todo el clear
 	TCCR0 |= (1 << WGM00) | (1 << COM01) | (1 << CS00);
 	TCCR2 |= (1 << WGM20) | (1 << COM21) | (1 << CS20);
@@ -305,6 +303,9 @@ int main(void)
 
 	DDRB |= (1 << PB3);
 	DDRD |= (1 << PD7);
+
+	// Allow Car to enter 
+	CanWeMove = 'Y';
 
 	// Inicializa UART Bus
 	Initialize();
@@ -330,7 +331,7 @@ int main(void)
 		//motores();
 		//Ruta1();
 		//Ruta2();
-		if (CanWeMove) {			
+		if (CanWeMove == 'Y') {			
 			Prueba(); // Evalua el status de los sensores para seguir adelante o no
 		}
 		else {

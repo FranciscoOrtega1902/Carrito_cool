@@ -1,1 +1,16 @@
 /.vs
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+
+Debug/Carrito_cool.eep
+.gitignore
+Debug/Carrito_cool.elf
+Debug/Carrito_cool.hex
+Debug/Carrito_cool.lss
+Debug/Carrito_cool.map
+Debug/Carrito_cool.srec
+Carrito_cool.atsln
+

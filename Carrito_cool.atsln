@@ -3,7 +3,14 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Atmel Studio Solution File, Format Version 11.00
 VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "Carrito_cool", "Carrito_cool\Carrito_cool.cproj", "{DCE6C7E3-EE26-4D79-826B-08594B9AD897}"
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "Carrito_cool", "Carrito_cool.cproj", "{DCE6C7E3-EE26-4D79-826B-08594B9AD897}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F234D047-EEBF-4715-9470-065F5CC79C12}"
+	ProjectSection(SolutionItems) = preProject
+		init.c = init.c
+		init.h = init.h
+		UARTEXAMPLE.c = UARTEXAMPLE.c
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,5 +25,14 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(SourceCodeControl) = preSolution
+		SccNumberOfProjects = 2
+		SccProjectName0 = Carrito_cool
+		SccLocalPath0 = .
+		SccProvider0 = MSSCCI:ClearCase\u0020ClearTeam\u0020Explorer
+		CanCheckoutShared = false
+		SccProjectUniqueName1 = Carrito_cool.cproj
+		SccLocalPath1 = .
 	EndGlobalSection
 EndGlobal

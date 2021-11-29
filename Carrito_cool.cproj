@@ -152,6 +152,12 @@
     <Compile Include="font8x16.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="init.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="init.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="main.c">
       <SubType>compile</SubType>
     </Compile>
@@ -171,6 +177,9 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="soft_i2c.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="UARTEXAMPLE.c">
       <SubType>compile</SubType>
     </Compile>
   </ItemGroup>
