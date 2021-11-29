@@ -239,7 +239,7 @@ void Prueba(){
 	vQR3=(sensor3*0.00488);
 
 	if (vQR1 >= BLANCO_LI && vQR1 <= BLANCO_LS && vQR2 >= NEGRO_LI && vQR2 <= NEGRO_LS && vQR3 >= BLANCO_LI && vQR3 <= BLANCO_LS){
-		//L�NEA RECTA
+		//LINEA RECTA
 		//BNB
 		OCR0 = 150;
 		OCR2 = 150;
@@ -250,38 +250,37 @@ void Prueba(){
 	  OCR0 = 0;
 	  OCR2 = 0;	
 	}	
-	else if (vQR1 >= 3.5 && vQR1 <= 5 && vQR2 >= 3.5 && vQR2 <= 5 && vQR3 >= 3.5 && vQR3 <= 5) { //MEJORAR PRRO
+	else if (vQR1 >= ROJO_LI && vQR1 <= ROJO_LS && vQR2 >= NEGRO_LI && vQR2 <= NEGRO_LS && vQR3 >= ROJO_LI && vQR3 <= ROJO_LS) { //MEJORAR PRRO
      // Cambia los valores de voltaje, por ejemplo 3.5 por los macros BLANCO, ROJO o NEGRO 
-	 //ESTACI�N
+	 // El carro llega a la ESTACION
 	 //RNR
-	 UARTWriteChar('s'); // Dile al otro carro que aguante 10 segundos
+	 UARTWriteChar('s'); // Dile al otro carro que aguante...
 	 OCR0 = 0;
 	 OCR2 = 0;
 	 _delay_ms(10000); //AJUSTAR TIEMPO PRRO
 	 UARTWriteChar('d'); // Dile al otro carro que continue.. 
 	 OCR0 = 150;
 	 OCR2 = 150;
-
 			
 	}	
 	
-	else if (vQR1 >= 2 && vQR1 <= 3.25 && vQR2 >= 2 && vQR2 <= 3.25  && vQR3 >= 3.5 && vQR3 <= 5){		
+	else if (vQR1 >= NEGRO_LI && vQR1 <= NEGRO_LS && vQR2 >= NEGRO_LI && vQR2 <= NEGRO_LS  && vQR3 >= BLANCO_LI && vQR3 <= BLANCO_LS){		
 		//GIRO A LA DERECHA
 		//NNB
 		OCR0 = 150;
 		OCR2 = 100;
 	}
 	
-	else if (vQR1 >= 3.5 && vQR1 <= 5 && vQR2 >= 2 && vQR2 <= 3.25  && vQR3 >= 2 && vQR3 <= 3.25){		
+	else if (vQR1 >= BLANCO_LI && vQR1 <= BLANCO_LS && vQR2 >= NEGRO_LI && vQR2 <= NEGRO_LS  && vQR3 >= NEGRO_LI && vQR3 <= NEGRO_LS){		
 		//GIRO A LA IZQUIERDA
 		//BNN
 		OCR0 = 100;
 		OCR2 = 150;
 	}	
 	
-	else if (vQR1 >= 2 && vQR1 <= 3.25 && vQR2 >= 2 && vQR2 <= 3.25  && vQR3 >= 2 && vQR3 <= 3.25){
+	else if (vQR1 >= NEGRO_LI && vQR1 <= NEGRO_LS && vQR2 >= NEGRO_LI && vQR2 <= NEGRO_LS  && vQR3 >= NEGRO_LI && vQR3 <= NEGRO_LS){
 		
-		//INTERSECCI�N
+		//INTERSECCION
 		//NNN
 		OCR0 = 100;
 		OCR2 = 150;
@@ -293,7 +292,7 @@ int main(void)
 	// ADC
 	ADMUX = 0b00000000;
 	ADCSRA |= (1 << ADIE) | (1 << ADEN) | (1 << ADPS0) | (1 << ADPS1) | (1 << ADPS2); //Habilitando ADC y su interpretacion
-	ADCSRA |= (1 << ADSC); //Iniciando Primera Conversi�n
+	ADCSRA |= (1 << ADSC); //Iniciando Primera Conversion
 	//10 bits phase correct, sin preescalador,  todo el clear
 	TCCR0 |= (1 << WGM00) | (1 << COM01) | (1 << CS00);
 	TCCR2 |= (1 << WGM20) | (1 << COM21) | (1 << CS20);
