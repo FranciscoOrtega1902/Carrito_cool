@@ -22,7 +22,5 @@
 #include "includes.h"
 
 void Initialize (void);
-
 char UARTReadChar (void);
-
 void UARTWriteChar (char data);

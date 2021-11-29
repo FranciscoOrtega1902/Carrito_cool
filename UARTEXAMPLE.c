@@ -19,27 +19,10 @@
 *
 ***************************************************/
 
-#include "includes.h"
-#include "init.h"
 
-//  Declare functions and global variables here
+//  Ejemplo, no puede haber 2 mains
 
-
-ISR(USART_RXC_vect)
-{
-    //  UART Receiver Interrupt
-
-}
-
-ISR(USART_TXC_vect)
-{
-    //  UART Transmitter Interrupt
-
-}
-
-//  Start of main function
-
-int main (void)
+int ExampleFunction (void)
 {
 	Initialize();
 	while(1)
